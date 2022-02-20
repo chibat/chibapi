@@ -224,7 +224,7 @@ async function handler(req: Request, connInfo: ConnInfo) {
     return await dns(url);
   } else if (url.pathname === "/spec.yaml") {
     return spec();
-  } else if (url.pathname === "/swagger-ui.html") {
+  } else if (url.pathname === "/swagger-ui.html" || url.pathname === "/") {
     return swaggerUi(url);
   }
   return notFound();
