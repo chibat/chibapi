@@ -1,5 +1,5 @@
 # chibapi
 
-https://chibapi.deno.dev/swagger-ui.html
+https://chibapi.deno.dev/
 
 
