@@ -31,6 +31,14 @@ function ip(connInfo: ConnInfo) {
   });
 }
 
+function request(req: Request) {
+  const headers = [];
+  for (const header of req.headers.entries()) {
+    headers.push(header);
+  }
+  return Response.json({ method: req.method, url: req.url, headers });
+}
+
 async function dns(url: URL) {
   const query = url.searchParams.get("query");
   if (query) {
@@ -225,14 +233,6 @@ function swaggerUi(url: URL) {
       headers: { "content-type": "text/html; charset=utf-8" },
     },
   );
-}
-
-function request(req: Request) {
-  const headers = [];
-  for (const header of req.headers.entries()) {
-    headers.push(header);
-  }
-  return Response.json({ method: req.method, url: req.url, headers });
 }
 
 async function handler(req: Request, connInfo: ConnInfo) {
