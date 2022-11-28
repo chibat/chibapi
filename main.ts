@@ -87,6 +87,13 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/Ip"
+  /request:
+    get:
+      summary: "request"
+      description: "request"
+      operationId: "request"
+      produces:
+      - "application/json"
   /dns:
     get:
       summary: "Logs user into the system"
@@ -148,7 +155,6 @@ externalDocs:
 }
 
 function swaggerUi(url: URL) {
-
   const specUrl = url.protocol + "//" + url.host + "/spec.yaml";
 
   const resourceBase = "https://unpkg.com/swagger-ui-dist@4.1.3/";
@@ -216,12 +222,22 @@ function swaggerUi(url: URL) {
   );
 }
 
+function request(req: Request) {
+  const headers = [];
+  for (const header of req.headers.entries()) {
+    headers.push(header);
+  }
+  return Response.json({ method: req.method, url: req.url, headers });
+}
+
 async function handler(req: Request, connInfo: ConnInfo) {
   const url = new URL(req.url);
   if (url.pathname === "/ip") {
     return ip(connInfo);
   } else if (url.pathname === "/dns") {
     return await dns(url);
+  } else if (url.pathname === "/request") {
+    return request(req);
   } else if (url.pathname === "/spec.yaml") {
     return spec();
   } else if (url.pathname === "/swagger-ui.html" || url.pathname === "/") {
