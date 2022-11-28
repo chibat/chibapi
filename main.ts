@@ -94,6 +94,11 @@ paths:
       operationId: "request"
       produces:
       - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          #schema:
+          #  $ref: "#/definitions/Ip"
   /dns:
     get:
       summary: "Logs user into the system"
